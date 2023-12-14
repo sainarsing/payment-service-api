@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const stripe = require("stripe")("sk_test_51ODiD8SJmdjx949oeLXWiCzgnS2TTVTwHN7sUNxoDmcgCoHvxGydBeqtTgxVrenlZlsNcPHquFI2HVADmS6CK85Q00P9A0pfGn")
+require("dotenv").config()
 
 app.use(express.json());
 app.use(cors());
@@ -30,7 +31,7 @@ app.post("/api/create-checkout-session", async(req,res)=>{
   res.json({id:session.id})
 })
 
-
-app.listen(7000, ()=>{
-  console.log("server start")
+const port = process.env.PORT || 8080
+app.listen(port, ()=>{
+  console.log("server start" + "on " + port)
 })
