@@ -7,6 +7,8 @@ require("dotenv").config()
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req, res)=> res.send("server running"))
+
 app.post("/api/create-checkout-session", async(req,res)=>{
   const {products} = req.body;
 
@@ -24,14 +26,14 @@ app.post("/api/create-checkout-session", async(req,res)=>{
     payment_method_types:["card"],
     line_items: lineItems,
     mode:"payment",
-    success_url:"http://localhost:3001/success",
-    cancel_url:"http://localhost:3001/cancel",
+    success_url:"https://medic-pharamcy-app.vercel.app/success",
+    cancel_url:"https://medic-pharamcy-app.vercel.app/cancel",
   })
 
   res.json({id:session.id})
 })
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8000
 app.listen(port, ()=>{
-  console.log("server start" + "on " + port)
+  console.log("server started " + "on " + port)
 })
